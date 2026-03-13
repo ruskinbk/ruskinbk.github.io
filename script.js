@@ -9,10 +9,47 @@ if (hamburger) {
     });
 }
 
-// Close menu when link is clicked
+// Theme toggle (light/dark)
+const themeToggle = document.getElementById('theme-toggle');
+const storedTheme = localStorage.getItem('theme');
+
+const applyTheme = (theme) => {
+    document.documentElement.setAttribute('data-theme', theme);
+    const icon = themeToggle?.querySelector('i');
+    if (icon) {
+        icon.classList.remove('fa-sun', 'fa-moon');
+        icon.classList.add(theme === 'light' ? 'fa-sun' : 'fa-moon');
+    }
+};
+
+const getPreferredTheme = () => {
+    if (storedTheme) return storedTheme;
+    return window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+};
+
+const setTheme = (theme) => {
+    applyTheme(theme);
+    localStorage.setItem('theme', theme);
+};
+
+const initialTheme = getPreferredTheme();
+setTheme(initialTheme);
+
+if (themeToggle) {
+    themeToggle.addEventListener('click', () => {
+        const newTheme = document.documentElement.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+        setTheme(newTheme);
+    });
+}
+
+// Close menu when link is clicked (mobile only)
 const navLinks = document.querySelectorAll('.nav-link');
+const isMobileOpen = () => window.innerWidth <= 768 && window.getComputedStyle(navMenu).display !== 'none';
+
 navLinks.forEach(link => {
     link.addEventListener('click', () => {
+        if (link.id === 'theme-toggle') return; // Keep menu open when toggling theme on mobile
+        if (!isMobileOpen()) return;
         navMenu.style.display = 'none';
         hamburger.classList.remove('active');
     });
@@ -153,16 +190,18 @@ style.textContent = `
 `;
 document.head.appendChild(style);
 
-// Smooth scroll for navigation links
+// Smooth scroll for navigation links (offset by fixed navbar height)
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
         const href = this.getAttribute('href');
-        if (href !== '#' && document.querySelector(href)) {
+        const target = href !== '#' ? document.querySelector(href) : null;
+        if (target) {
             e.preventDefault();
-            const target = document.querySelector(href);
-            target.scrollIntoView({
-                behavior: 'smooth',
-                block: 'start'
+            const navHeight = document.querySelector('.navbar')?.offsetHeight || 0;
+            const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - navHeight - 16;
+            window.scrollTo({
+                top: targetPosition,
+                behavior: 'smooth'
             });
         }
     });
@@ -237,8 +276,11 @@ window.addEventListener('scroll', () => {
     });
 
     navLinks.forEach(link => {
+        const href = link.getAttribute('href');
+        if (!href) return;
+
         link.classList.remove('active');
-        if (link.getAttribute('href').slice(1) === current) {
+        if (href.slice(1) === current) {
             link.classList.add('active');
         }
     });
@@ -298,7 +340,15 @@ function setRandomQuote() {
     authorEl.textContent = quote.author ? `— ${quote.author}` : '';
 }
 
-document.addEventListener('DOMContentLoaded', setRandomQuote);
+document.addEventListener('DOMContentLoaded', () => {
+    setRandomQuote();
+
+    const loader = document.getElementById('page-loader');
+    if (loader) {
+        loader.classList.add('loaded');
+        setTimeout(() => loader.remove(), 500);
+    }
+});
 
 console.log('Portfolio website loaded successfully!');
 

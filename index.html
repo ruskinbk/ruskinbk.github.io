@@ -40,6 +40,11 @@
     </script>
 </head>
 <body>
+    <!-- Loading Screen -->
+    <div id="page-loader" class="page-loader" aria-hidden="true">
+        <div class="loader" aria-hidden="true"></div>
+    </div>
+
     <!-- Navigation -->
     <nav class="navbar">
         <div class="nav-container">
@@ -48,12 +53,15 @@
             </div>
             <ul class="nav-menu">
                 <li><a href="#home" class="nav-link">Home</a></li>
-                <li><a href="#about" class="nav-link">About</a></li>
-                <li><a href="#services" class="nav-link">Services</a></li>
-                <li><a href="#skills" class="nav-link">Skills &amp; Experience</a></li>
+                <li><a href="#skills" class="nav-link">Skills &amp; Tools</a></li>
                 <li><a href="#portfolio" class="nav-link">Projects</a></li>
-                <li><a href="#blogs" class="nav-link">Blogs</a></li>
-                <li><a href="#contact" class="nav-link cta-link">Hire Me</a></li>
+                <li><a href="#services" class="nav-link">Services</a></li>
+                <li><a href="#contact" class="nav-link cta-link">Contact</a></li>
+                <li>
+                    <button id="theme-toggle" class="nav-link theme-toggle" aria-label="Toggle theme">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                </li>
             </ul>
             <div class="hamburger">
                 <span></span>
@@ -63,68 +71,56 @@
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <section id="home" class="hero">
-        <div class="hero-content">
-            <h1>Professional Graphic Design for Your Brand</h1>
-            <p>Award-winning designer creating stunning branding, UI/UX, and visual solutions</p>
-            <div class="hero-ctas">
-                <a href="#contact" class="cta-button">Hire Me</a>
-                <a href="#portfolio" class="cta-button secondary">View Portfolio</a>
-            </div>
-            <p class="hero-subtext">✓ 50+ Projects Completed | ✓ 30+ Happy Clients | ✓ 5+ Years Experience</p>
-        </div>
-        <div class="hero-background">
-            <div class="gradient-shape shape-1"></div>
-            <div class="gradient-shape shape-2"></div>
-        </div>
-    </section>
-
-    <!-- About Section -->
-    <section id="about" class="about">
+    <!-- Home Section -->
+    <section id="home" class="about">
         <div class="container">
             <div class="about-content">
                 <div class="about-text">
-                    <h2>Award-Winning Designer & Creative Strategist</h2>
+                    <h1 class="home-title">I am Graphic Designer</h1>
                     <h3>Who am I?</h3>
                     <p>I'm a passionate graphic designer with expertise in creating compelling visual identities that drive business results. With 5+ years of experience, I've worked with startups and established brands to bring their visions to life through thoughtful, strategic design.</p>
                     <p>My approach combines market research, brand strategy, and artistic excellence, ensuring every design solution is both beautiful and functional. I'm committed to delivering designs that not only look amazing but also achieve your business goals.</p>
                     <a href="myresume.pdf" class="cta-button secondary" download>Download Resume</a>
-                    
-                    <div class="stats">
-                        <div class="stat">
-                            <span class="stat-number">50+</span>
-                            <span class="stat-label">Projects</span>
-                        </div>
-                        <div class="stat">
-                            <span class="stat-number">30+</span>
-                            <span class="stat-label">Happy Clients</span>
-                        </div>
-                        <div class="stat">
-                            <span class="stat-number">5+</span>
-                            <span class="stat-label">Years Experience</span>
-                        </div>
-                    </div>
-
-                    <h3>Core Expertise</h3>
-                    <div class="skills">
-                        <span class="skill-tag">UI/UX Design</span>
-                        <span class="skill-tag">Branding</span>
-                        <span class="skill-tag">Typography</span>
-                        <span class="skill-tag">Illustration</span>
-                        <span class="skill-tag">Motion Graphics</span>
-                        <span class="skill-tag">Web Design</span>
-                        <span class="skill-tag">Logo Design</span>
-                        <span class="skill-tag">Brand Strategy</span>
-                    </div>
-
-                    <a href="#contact" class="cta-button" style="margin-top: 2rem;">Start Your Project</a>
                 </div>
                 <div class="about-image">
                     <div class="image-placeholder">
                         <i class="fas fa-user-circle"></i>
                     </div>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills & Tools Section -->
+    <section id="skills" class="skills-section">
+        <div class="container">
+            <h2>Skills &amp; Tools</h2>
+            <p class="section-intro">A quick look at the tools and skills I use to create impactful brand experiences.</p>
+
+            <div class="skills-grid">
+                <div class="skill-block">
+                    <h3>Tools &amp; Skills</h3>
+                    <ul>
+                        <li>Adobe Creative Tools (Photoshop, Illustrator, InDesign)</li>
+                        <li>Graphic Design</li>
+                        <li>Typography</li>
+                        <li>Photo Editing</li>
+                        <li>Branding &amp; Logo Design</li>
+                        <li>Social Media Design</li>
+                        <li>Visual Storytelling</li>
+                    </ul>
+                </div>
+                <div class="skill-block">
+                    <h3>Experience</h3>
+                    <ul class="experience-timeline">
+                        <li><strong>2025 – 2026:</strong> Graphic Designer Intern, INSOFT Research &amp; Development</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="skills-cta">
+                <a href="#contact" class="cta-button">Hire Me</a>
+                <a href="myresume.pdf" class="cta-button secondary" download>Download Resume</a>
             </div>
         </div>
     </section>
@@ -255,84 +251,6 @@
         </div>
     </section>
 
-    <!-- Blogs Section -->
-    <section id="blogs" class="blogs">
-        <div class="container">
-            <h2>Latest Blog Posts</h2>
-            <p class="section-intro">Insights on design, branding, and creative growth.</p>
-            <div class="blog-grid">
-                <article class="blog-card">
-                    <h3>Design Thinking for Startups</h3>
-                    <p>How to build a brand that resonates with your audience and scales with your growth.</p>
-                    <a href="https://medium.com/@ruskinbk" class="read-more" target="_blank" rel="noopener">Read More →</a>
-                </article>
-                <article class="blog-card">
-                    <h3>Optimize Your UI for Conversions</h3>
-                    <p>Simple UI changes that can improve retention and customer satisfaction.</p>
-                    <a href="https://medium.com/@ruskinbk" class="read-more" target="_blank" rel="noopener">Read More →</a>
-                </article>
-                <article class="blog-card">
-                    <h3>Building a Cohesive Visual Identity</h3>
-                    <p>Tips for creating consistent branding across web, social, and print.</p>
-                    <a href="https://medium.com/@ruskinbk" class="read-more" target="_blank" rel="noopener">Read More →</a>
-                </article>
-            </div>
-        </div>
-    </section>
-
-    <!-- Testimonials Section -->
-    <section id="testimonials" class="testimonials">
-        <div class="container">
-            <h2>What Clients Say</h2>
-            <div class="testimonials-grid">
-                <div class="testimonial-card">
-                    <div class="stars">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <p>"Exceptional design work and professional approach. RuskinBK transformed our brand identity and our sales increased by 40% within 3 months!"</p>
-                    <div class="testimonial-author">
-                        <strong>Sarah Johnson</strong>
-                        <span>Founder, TechFlow</span>
-                    </div>
-                </div>
-
-                <div class="testimonial-card">
-                    <div class="stars">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <p>"Working with RuskinBK was seamless. Great communication, creative solutions, and delivered beyond expectations. Highly recommended!"</p>
-                    <div class="testimonial-author">
-                        <strong>Michael Chen</strong>
-                        <span>CEO, EcoBeauty</span>
-                    </div>
-                </div>
-
-                <div class="testimonial-card">
-                    <div class="stars">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <p>"Our app design was brilliant. The UI/UX improvements resulted in a 50% increase in user retention. Best investment we made!"</p>
-                    <div class="testimonial-author">
-                        <strong>Emma Williams</strong>
-                        <span>Product Lead, FitFlow</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <!-- Services Section -->
     <section id="services" class="services">
         <div class="container">
@@ -379,135 +297,6 @@
         </div>
     </section>
 
-    <!-- Skills & Experience Section -->
-    <section id="skills" class="skills-section">
-        <div class="container">
-            <h2>Skills &amp; Experience</h2>
-            <p class="section-intro">A quick look at the tools, techniques, and experience I bring to every project.</p>
-
-            <div class="skills-grid">
-                <div class="skill-block">
-                    <h3>Design Expertise</h3>
-                    <ul>
-                        <li>Brand Identity &amp; Logo Design</li>
-                        <li>UI/UX &amp; Product Design</li>
-                        <li>Illustration &amp; Motion Graphics</li>
-                        <li>Web &amp; Wireframe Design</li>
-                        <li>Packaging &amp; Print Design</li>
-                    </ul>
-                </div>
-                <div class="skill-block">
-                    <h3>Experience Highlights</h3>
-                    <ul class="experience-timeline">
-                        <li><strong>2024 – Present:</strong> Senior Freelance Designer</li>
-                        <li><strong>2022 – 2024:</strong> Lead Designer at Creative Agency</li>
-                        <li><strong>2020 – 2022:</strong> UI/UX Designer for SaaS &amp; Mobile Apps</li>
-                        <li><strong>2018 – 2020:</strong> Brand Designer for startups and small businesses</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="skills-cta">
-                <a href="#contact" class="cta-button">Hire Me</a>
-                <a href="myresume.pdf" class="cta-button secondary" download>Download Resume</a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Why Choose Me Section -->
-    <section id="why-choose" class="why-choose">
-        <div class="container">
-            <h2>Why Choose RuskinBK?</h2>
-            <div class="benefits-grid">
-                <div class="benefit-item">
-                    <div class="benefit-icon">
-                        <i class="fas fa-rocket"></i>
-                    </div>
-                    <h3>Results-Driven</h3>
-                    <p>Designs that aren't just beautiful—they deliver measurable business results and increase ROI</p>
-                </div>
-                <div class="benefit-item">
-                    <div class="benefit-icon">
-                        <i class="fas fa-handshake"></i>
-                    </div>
-                    <h3>Expert Communication</h3>
-                    <p>Clear communication throughout the project with regular updates and unlimited revisions</p>
-                </div>
-                <div class="benefit-item">
-                    <div class="benefit-icon">
-                        <i class="fas fa-clock"></i>
-                    </div>
-                    <h3>On-Time Delivery</h3>
-                    <p>Reliable timelines and quick turnaround times without compromising on quality</p>
-                </div>
-                <div class="benefit-item">
-                    <div class="benefit-icon">
-                        <i class="fas fa-shield-alt"></i>
-                    </div>
-                    <h3>Full Ownership</h3>
-                    <p>Complete ownership of all files and designs. All copyrights transfer to you</p>
-                </div>
-                <div class="benefit-item">
-                    <div class="benefit-icon">
-                        <i class="fas fa-chart-line"></i>
-                    </div>
-                    <h3>Growth Focused</h3>
-                    <p>Designs aligned with your business goals to help you attract more clients and increase revenue</p>
-                </div>
-                <div class="benefit-item">
-                    <div class="benefit-icon">
-                        <i class="fas fa-headset"></i>
-                    </div>
-                    <h3>Ongoing Support</h3>
-                    <p>Post-delivery support and consultations to ensure your design performs perfectly</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Process Section -->
-    <section id="process" class="process">
-        <div class="container">
-            <h2>How I Work</h2>
-            <div class="process-timeline">
-                <div class="process-step">
-                    <div class="step-number">01</div>
-                    <h3>Discovery</h3>
-                    <p>We discuss your vision, goals, target audience, and project requirements in detail</p>
-                </div>
-                <div class="process-arrow">→</div>
-                <div class="process-step">
-                    <div class="step-number">02</div>
-                    <h3>Strategy</h3>
-                    <p>I create a personalized design strategy aligned with your business objectives</p>
-                </div>
-                <div class="process-arrow">→</div>
-                <div class="process-step">
-                    <div class="step-number">03</div>
-                    <h3>Design</h3>
-                    <p>I create designs with unlimited revisions until you're completely satisfied</p>
-                </div>
-                <div class="process-arrow">→</div>
-                <div class="process-step">
-                    <div class="step-number">04</div>
-                    <h3>Launch</h3>
-                    <p>Final delivery of all files with ongoing support and consultation</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Motivation Section -->
-    <section id="quote" class="quote">
-        <div class="container">
-            <h2>Daily Growth Quote</h2>
-            <div class="quote-card">
-                <p id="motivational-quote">Loading inspiration...</p>
-                <p id="quote-author" class="quote-author"></p>
-            </div>
-            <p class="quote-note">Refresh the page for a new quote.</p>
-        </div>
-    </section>
 
     <!-- Contact Section -->
     <section id="contact" class="contact">
@@ -565,15 +354,6 @@
                     <p class="form-note">✓ No spam. Your privacy is important to us.</p>
                 </form>
             </div>
-        </div>
-    </section>
-
-    <!-- CTA Section -->
-    <section class="final-cta">
-        <div class="container">
-            <h2>Ready to Elevate Your Brand?</h2>
-            <p>Let's transform your vision into stunning reality. Contact me for a free consultation today!</p>
-            <a href="#contact" class="cta-button">Get Started Now</a>
         </div>
     </section>
 
