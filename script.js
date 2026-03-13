@@ -278,5 +278,27 @@ window.addEventListener('beforeunload', () => {
     console.log('Scroll depth:', Math.round(scrollDepth), '%');
 });
 
+// Motivational quote (random on reload)
+const motivationalQuotes = [
+    { text: 'Growth begins at the end of your comfort zone.', author: 'Neale Donald Walsch' },
+    { text: 'The secret of getting ahead is getting started.', author: 'Mark Twain' },
+    { text: 'Small daily improvements are the key to staggering long-term results.', author: 'Unknown' },
+    { text: 'Dream bigger. Do bigger. Live bigger.', author: 'Unknown' },
+    { text: 'Consistency compounds. Keep going.', author: 'Unknown' },
+    { text: 'Every great design began as an idea to solve a problem.', author: 'Unknown' }
+];
+
+function setRandomQuote() {
+    const quoteEl = document.getElementById('motivational-quote');
+    const authorEl = document.getElementById('quote-author');
+    if (!quoteEl) return;
+
+    const quote = motivationalQuotes[Math.floor(Math.random() * motivationalQuotes.length)];
+    quoteEl.textContent = `"${quote.text}"`;
+    authorEl.textContent = quote.author ? `— ${quote.author}` : '';
+}
+
+document.addEventListener('DOMContentLoaded', setRandomQuote);
+
 console.log('Portfolio website loaded successfully!');
 

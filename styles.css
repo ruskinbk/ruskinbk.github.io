@@ -923,6 +923,157 @@ body {
     background-color: rgba(255, 255, 255, 0.9);
 }
 
+/* Skills & Experience Section */
+.skills-section {
+    padding: 80px 0;
+    background-color: var(--light-bg);
+}
+
+.skills-section h2 {
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 0.75rem;
+    color: var(--text-light);
+}
+
+.skills-section .section-intro {
+    text-align: center;
+    color: var(--text-muted);
+    margin-bottom: 3rem;
+    font-size: 1.1rem;
+}
+
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    margin-bottom: 2.5rem;
+}
+
+.skill-block h3 {
+    color: var(--text-light);
+    margin-bottom: 1rem;
+}
+
+.skill-block ul {
+    list-style: none;
+    color: var(--text-muted);
+    padding-left: 0;
+}
+
+.skill-block li {
+    margin-bottom: 0.75rem;
+    position: relative;
+    padding-left: 1.5rem;
+}
+
+.skill-block li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: var(--primary-color);
+}
+
+/* Blog Section */
+.blogs {
+    padding: 80px 0;
+    background-color: var(--dark-bg);
+}
+
+.blogs h2 {
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 0.75rem;
+    color: var(--text-light);
+}
+
+.blogs .section-intro {
+    text-align: center;
+    color: var(--text-muted);
+    margin-bottom: 3rem;
+    font-size: 1.1rem;
+}
+
+.blog-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+}
+
+.blog-card {
+    background-color: var(--card-bg);
+    padding: 2rem;
+    border-radius: 15px;
+    border: 1px solid rgba(99, 102, 241, 0.1);
+    transition: all 0.3s ease;
+}
+
+.blog-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--primary-color);
+}
+
+.blog-card h3 {
+    color: var(--text-light);
+    margin-bottom: 1rem;
+}
+
+.blog-card p {
+    color: var(--text-muted);
+    margin-bottom: 1.5rem;
+}
+
+.read-more {
+    color: var(--primary-color);
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.read-more:hover {
+    color: var(--secondary-color);
+}
+
+/* Quote Section */
+.quote {
+    padding: 80px 0;
+    background-color: var(--light-bg);
+    text-align: center;
+}
+
+.quote h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    color: var(--text-light);
+}
+
+.quote-card {
+    max-width: 780px;
+    margin: 0 auto 1.5rem;
+    padding: 2rem;
+    background-color: var(--card-bg);
+    border-radius: 15px;
+    border: 1px solid rgba(99, 102, 241, 0.1);
+}
+
+.quote-card p {
+    margin: 0;
+    line-height: 1.8;
+    color: var(--text-muted);
+    font-size: 1.1rem;
+}
+
+.quote-author {
+    margin-top: 1rem;
+    color: var(--primary-color);
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+
+.quote-note {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
 /* Footer */
 .footer {
     background-color: var(--dark-bg);
@@ -1111,6 +1262,9 @@ body {
     .about,
     .portfolio,
     .services,
+    .skills-section,
+    .blogs,
+    .quote,
     .contact,
     .testimonials,
     .why-choose,
