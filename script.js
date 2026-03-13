@@ -1,3 +1,62 @@
+// Custom Cursor
+const cursor = document.querySelector('.cursor');
+const cursorDot = document.querySelector('.cursor-dot');
+
+if (cursor && cursorDot) {
+    let mouseX = 0;
+    let mouseY = 0;
+    let cursorX = 0;
+    let cursorY = 0;
+
+    document.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+    });
+
+    function updateCursor() {
+        cursorX += (mouseX - cursorX) * 0.1;
+        cursorY += (mouseY - cursorY) * 0.1;
+
+        cursor.style.left = `${cursorX - 10}px`;
+        cursor.style.top = `${cursorY - 10}px`;
+        cursorDot.style.left = `${mouseX - 3}px`;
+        cursorDot.style.top = `${mouseY - 3}px`;
+
+        requestAnimationFrame(updateCursor);
+    }
+    updateCursor();
+
+    // Hover effects
+    document.querySelectorAll('a, button, .showcase-card, .service-card, .skill-card, .quote-card').forEach(el => {
+        el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
+        el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
+    });
+}
+
+// Scroll Progress Bar
+const scrollProgress = document.querySelector('.scroll-progress-bar');
+
+window.addEventListener('scroll', () => {
+    const scrollTop = window.pageYOffset;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const scrollPercent = (scrollTop / docHeight) * 100;
+    if (scrollProgress) {
+        scrollProgress.style.width = `${scrollPercent}%`;
+    }
+});
+
+// Parallax effect for background shapes
+window.addEventListener('scroll', () => {
+    const scrolled = window.pageYOffset;
+    const shapes = document.querySelectorAll('.gradient-shape');
+    
+    shapes.forEach((shape, index) => {
+        const rate = (index + 1) * 0.5;
+        const yPos = -(scrolled * rate);
+        shape.style.transform = `translateY(${yPos}px)`;
+    });
+});
+
 // Mobile menu toggle
 const hamburger = document.querySelector('.hamburger');
 const navMenu = document.querySelector('.nav-menu');
@@ -57,7 +116,7 @@ navLinks.forEach(link => {
 
 // Portfolio filter
 const filterButtons = document.querySelectorAll('.filter-btn');
-const portfolioItems = document.querySelectorAll('.portfolio-item');
+const portfolioItems = document.querySelectorAll('.showcase-item');
 
 filterButtons.forEach(button => {
     button.addEventListener('click', () => {
@@ -98,34 +157,57 @@ filterButtons.forEach(button => {
 
 // Contact form submission
 const contactForm = document.querySelector('.contact-form');
+const serviceSelect = document.getElementById('service');
+const otherServiceField = document.getElementById('other-service');
+
+const updateOtherServiceVisibility = () => {
+    if (!serviceSelect || !otherServiceField) return;
+    if (serviceSelect.value === 'other') {
+        otherServiceField.style.display = 'block';
+        otherServiceField.required = true;
+    } else {
+        otherServiceField.style.display = 'none';
+        otherServiceField.required = false;
+        otherServiceField.value = '';
+    }
+};
+
+if (serviceSelect) {
+    serviceSelect.addEventListener('change', updateOtherServiceVisibility);
+}
+
 if (contactForm) {
+    updateOtherServiceVisibility();
+
     contactForm.addEventListener('submit', (e) => {
         e.preventDefault();
 
         const name = document.getElementById('name').value;
         const email = document.getElementById('email').value;
         const service = document.getElementById('service').value;
-        const budget = document.getElementById('budget').value;
+        const otherService = document.getElementById('other-service').value;
         const message = document.getElementById('message').value;
 
         // Validate form
-        if (name && email && service && budget && message) {
+        if (name && email && service && message && (service !== 'other' || otherService)) {
+            const selectedService = service === 'other' ? `Other - ${otherService}` : service;
+
             // Create mailto link with all fields
             const emailBody = `Name: ${name}
 Email: ${email}
-Service Interested In: ${service}
-Budget: ${budget}
+Service Interested In: ${selectedService}
 
 Project Details:
 ${message}`;
 
-            const mailtoLink = `mailto:your.email@example.com?subject=New Project Inquiry from ${encodeURIComponent(name)}&body=${encodeURIComponent(emailBody)}`;
+            const mailtoLink = `mailto:ruskinnnbk@gmail.com?subject=New Project Inquiry from ${encodeURIComponent(name)}&body=${encodeURIComponent(emailBody)}`;
 
             // Open email client
             window.location.href = mailtoLink;
 
             // Reset form
             contactForm.reset();
+            updateOtherServiceVisibility();
 
             // Show success message
             showNotification('Thank you! Opening your email client...');
@@ -222,13 +304,15 @@ const observer = new IntersectionObserver((entries) => {
     });
 }, observerOptions);
 
-// Observe portfolio items
-portfolioItems.forEach(item => {
-    item.style.opacity = '0';
-    item.style.transform = 'translateY(20px)';
-    item.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-    observer.observe(item);
+// Observe skill cards
+document.querySelectorAll('.skill-card').forEach((card, index) => {
+    card.style.opacity = '0';
+    card.style.transform = 'translateY(20px)';
+    card.style.transition = `opacity 0.6s ease ${(index * 0.1) + 0.2}s, transform 0.6s ease ${(index * 0.1) + 0.2}s`;
+    observer.observe(card);
 });
+
+// Observe portfolio items - removed since we use CSS animations now
 
 // Observe service cards
 document.querySelectorAll('.service-card').forEach(card => {
@@ -320,28 +404,25 @@ window.addEventListener('beforeunload', () => {
     console.log('Scroll depth:', Math.round(scrollDepth), '%');
 });
 
-// Motivational quote (random on reload)
-const motivationalQuotes = [
-    { text: 'Growth begins at the end of your comfort zone.', author: 'Neale Donald Walsch' },
-    { text: 'The secret of getting ahead is getting started.', author: 'Mark Twain' },
-    { text: 'Small daily improvements are the key to staggering long-term results.', author: 'Unknown' },
-    { text: 'Dream bigger. Do bigger. Live bigger.', author: 'Unknown' },
-    { text: 'Consistency compounds. Keep going.', author: 'Unknown' },
-    { text: 'Every great design began as an idea to solve a problem.', author: 'Unknown' }
-];
-
-function setRandomQuote() {
-    const quoteEl = document.getElementById('motivational-quote');
-    const authorEl = document.getElementById('quote-author');
-    if (!quoteEl) return;
-
-    const quote = motivationalQuotes[Math.floor(Math.random() * motivationalQuotes.length)];
-    quoteEl.textContent = `"${quote.text}"`;
-    authorEl.textContent = quote.author ? `— ${quote.author}` : '';
-}
-
 document.addEventListener('DOMContentLoaded', () => {
-    setRandomQuote();
+    // Fetch and display quotes
+    const quotesContainer = document.getElementById('quotes-container');
+    if (quotesContainer) {
+        fetch('https://api.quotable.io/quotes/random?tags=design,motivation,growth&limit=3')
+            .then(response => response.json())
+            .then(quotes => {
+                quotesContainer.innerHTML = quotes.map((quote, index) => `
+                    <div class="quote-card" style="opacity: 0; transform: translateY(20px); animation: fadeInUp 0.8s ease ${(index * 0.2) + 0.5}s both;">
+                        <blockquote>"${quote.content}"</blockquote>
+                        <cite>— ${quote.author}</cite>
+                    </div>
+                `).join('');
+            })
+            .catch(error => {
+                console.error('Error fetching quotes:', error);
+                quotesContainer.innerHTML = '<p>Unable to load quotes at this time.</p>';
+            });
+    }
 
     const loader = document.getElementById('page-loader');
     if (loader) {
