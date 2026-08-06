@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Study Blogs & Resources | RuskinBK</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="index.html">RUSKIN</a>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html#home" class="nav-link">Home</a></li>
+                <li><a href="blogs.html" class="nav-link">Resources</a></li>
+                <li><a href="blogs.html" class="nav-link">Blogs</a></li>
+                <li><a href="index.html#contact" class="nav-link cta-link">Contact</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <main class="page-main">
+        <section class="blogs-page-hero">
+            <div class="container">
+                <p class="section-label">Study Blogs</p>
+                <h1>Notes, PDFs, and Blog Posts for Learners</h1>
+                <p>Browse school resources, literature articles, coding tutorials, and study notes in one place.</p>
+            </div>
+        </section>
+
+        <section class="blogs-page-content">
+            <div class="container">
+                <div class="resource-library">
+                    <div class="resource-library-header">
+                        <h3>All Classes Resources</h3>
+                        <p>Browse notes, documents, and files for every class in one place.</p>
+                    </div>
+
+                    <div class="resource-library-grid">
+                        <div class="resource-category-card">
+                            <h4>Class 6</h4>
+                            <ul>
+                                <li>Science notes</li>
+                                <li>Math worksheet</li>
+                                <li>Basic grammar PDF</li>
+                            </ul>
+                        </div>
+                        <div class="resource-category-card">
+                            <h4>Class 7</h4>
+                            <ul>
+                                <li>Social studies notes</li>
+                                <li>English chapter summary</li>
+                                <li>Science revision file</li>
+                            </ul>
+                        </div>
+                        <div class="resource-category-card">
+                            <h4>Class 8</h4>
+                            <ul>
+                                <li>Math formula sheet</li>
+                                <li>Science model questions</li>
+                                <li>Grammar practice PDF</li>
+                            </ul>
+                        </div>
+                        <div class="resource-category-card">
+                            <h4>Class 9</h4>
+                            <ul>
+                                <li>Exam preparation notes</li>
+                                <li>Biology short notes</li>
+                                <li>Practice test document</li>
+                            </ul>
+                        </div>
+                        <div class="resource-category-card">
+                            <h4>Class 10</h4>
+                            <ul>
+                                <li>SEE revision notes</li>
+                                <li>Model question papers</li>
+                                <li>Subject-wise PDF files</li>
+                            </ul>
+                        </div>
+                        <div class="resource-category-card">
+                            <h4>Class 11</h4>
+                            <ul>
+                                <li>Physics study notes</li>
+                                <li>Chemistry concept file</li>
+                                <li>Math formula PDF</li>
+                            </ul>
+                        </div>
+                        <div class="resource-category-card">
+                            <h4>Class 12</h4>
+                            <ul>
+                                <li>NEB notes</li>
+                                <li>Revision documents</li>
+                                <li>Important question files</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="resource-manager">
+                    <div class="resource-manager-header">
+                        <h3>Write, View & Edit Resources</h3>
+                        <p>Create and manage study notes or blogs here.</p>
+                    </div>
+
+                    <form id="resource-form" class="resource-form">
+                        <div class="form-row">
+                            <input type="text" id="resource-title" placeholder="Title" required>
+                            <select id="resource-category" required>
+                                <option value="">Select category</option>
+                                <option value="School">School</option>
+                                <option value="Literature">Literature</option>
+                                <option value="Coding">Coding</option>
+                            </select>
+                        </div>
+                        <div class="form-row">
+                            <select id="resource-type" required>
+                                <option value="">Select type</option>
+                                <option value="PDF">PDF</option>
+                                <option value="Blog">Blog</option>
+                                <option value="Note">Note</option>
+                            </select>
+                            <input type="text" id="resource-link" placeholder="PDF link or article URL">
+                        </div>
+                        <textarea id="resource-content" rows="6" placeholder="Write your content here..." required></textarea>
+                        <div class="form-actions">
+                            <button type="submit" class="cta-button small">Save Resource</button>
+                            <button type="button" id="clear-form" class="cta-button secondary small">Clear</button>
+                        </div>
+                    </form>
+
+                    <div id="resource-list" class="resource-list"></div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2026 RuskinBK. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

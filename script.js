@@ -155,6 +155,145 @@ filterButtons.forEach(button => {
     });
 });
 
+// Resource manager
+const resourceForm = document.getElementById('resource-form');
+const resourceList = document.getElementById('resource-list');
+const clearFormButton = document.getElementById('clear-form');
+const resourceTitleInput = document.getElementById('resource-title');
+const resourceCategoryInput = document.getElementById('resource-category');
+const resourceTypeInput = document.getElementById('resource-type');
+const resourceLinkInput = document.getElementById('resource-link');
+const resourceContentInput = document.getElementById('resource-content');
+let editingResourceId = null;
+
+const defaultResources = [
+    {
+        id: Date.now().toString(),
+        title: 'Class 10 Math Revision Notes',
+        category: 'School',
+        type: 'PDF',
+        link: '#contact',
+        content: 'A short revision guide for important math formulas and practice questions.'
+    },
+    {
+        id: (Date.now() + 1).toString(),
+        title: 'Literature Blog: Poetry Summary',
+        category: 'Literature',
+        type: 'Blog',
+        link: '#contact',
+        content: 'A simple blog explaining themes, symbols, and key ideas in a poem.'
+    }
+];
+
+const getResources = () => {
+    const stored = localStorage.getItem('study-resources');
+    if (!stored) {
+        localStorage.setItem('study-resources', JSON.stringify(defaultResources));
+        return defaultResources;
+    }
+    try {
+        return JSON.parse(stored);
+    } catch (error) {
+        return defaultResources;
+    }
+};
+
+const saveResources = (resources) => {
+    localStorage.setItem('study-resources', JSON.stringify(resources));
+};
+
+const renderResources = () => {
+    if (!resourceList) return;
+    const resources = getResources();
+    if (!resources.length) {
+        resourceList.innerHTML = '<p class="resource-item">No resources yet. Add the first one above.</p>';
+        return;
+    }
+
+    resourceList.innerHTML = resources.map(resource => `
+        <article class="resource-item">
+            <h4>${resource.title}</h4>
+            <p>${resource.content}</p>
+            <div class="meta">
+                <span>${resource.category}</span>
+                <span>${resource.type}</span>
+            </div>
+            <div class="resource-actions">
+                ${resource.link ? `<a href="${resource.link}" class="blog-link" target="_blank" rel="noopener">Open</a>` : ''}
+                <button type="button" data-edit="${resource.id}">Edit</button>
+                <button type="button" data-delete="${resource.id}">Delete</button>
+            </div>
+        </article>
+    `).join('');
+};
+
+const resetResourceForm = () => {
+    if (resourceForm) resourceForm.reset();
+    editingResourceId = null;
+};
+
+if (resourceForm) {
+    resourceForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        const resources = getResources();
+        const newResource = {
+            id: editingResourceId || `${Date.now()}`,
+            title: resourceTitleInput.value.trim(),
+            category: resourceCategoryInput.value,
+            type: resourceTypeInput.value,
+            link: resourceLinkInput.value.trim(),
+            content: resourceContentInput.value.trim()
+        };
+
+        if (editingResourceId) {
+            const index = resources.findIndex(item => item.id === editingResourceId);
+            if (index !== -1) resources[index] = newResource;
+        } else {
+            resources.unshift(newResource);
+        }
+
+        saveResources(resources);
+        renderResources();
+        resetResourceForm();
+        showNotification(editingResourceId ? 'Resource updated' : 'Resource saved');
+    });
+}
+
+if (clearFormButton) {
+    clearFormButton.addEventListener('click', resetResourceForm);
+}
+
+if (resourceList) {
+    resourceList.addEventListener('click', (e) => {
+        const editButton = e.target.closest('[data-edit]');
+        const deleteButton = e.target.closest('[data-delete]');
+
+        if (editButton) {
+            const resource = getResources().find(item => item.id === editButton.getAttribute('data-edit'));
+            if (resource) {
+                editingResourceId = resource.id;
+                resourceTitleInput.value = resource.title;
+                resourceCategoryInput.value = resource.category;
+                resourceTypeInput.value = resource.type;
+                resourceLinkInput.value = resource.link;
+                resourceContentInput.value = resource.content;
+                resourceTitleInput.focus();
+            }
+        }
+
+        if (deleteButton) {
+            const id = deleteButton.getAttribute('data-delete');
+            const updatedResources = getResources().filter(item => item.id !== id);
+            saveResources(updatedResources);
+            renderResources();
+            showNotification('Resource deleted');
+        }
+    });
+}
+
+renderResources();
+
 // Contact form submission
 const contactForm = document.querySelector('.contact-form');
 const serviceSelect = document.getElementById('service');
